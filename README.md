@@ -37,6 +37,15 @@ That analytics system empowers stakeholders to:
 In summary, my opinionated analytics system combines technical excellence with practicality, enabling data-driven success.
 Let’s turn insights into action! 🚀📊
 
+## Architecture chart legend
+
+```mermaid
+flowchart TD
+ICA(Internal Component A: tech descripotion) --> |Sync operation| EC>External Component]
+EC -.-> |Async operation| ICB(Internal Component B: tech description)
+ICB ==> |Sync write operation| S[(Storage)]
+```
+
 ## Abstract architecture
 
 ```mermaid
