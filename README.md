@@ -36,3 +36,17 @@ That analytics system empowers stakeholders to:
 
 In summary, my opinionated analytics system combines technical excellence with practicality, enabling data-driven success.
 Let’s turn insights into action! 🚀📊
+
+## Abstract architecture
+
+```mermaid
+flowchart TD
+    C(Client SDK) --> |HTTP POST| R(Data Receiver)
+    R --> Q>Event Queue]
+    Q -.-> |Poll| W(Data Writer)
+    W ==> OD[(Operative Database)]
+    OD -.-> |Retention period| M(Data Migrator)
+    M ==> HD[(Historical Database)]
+    OD --> DM>Data Mart]
+    HD --> DM
+```
