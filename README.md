@@ -59,3 +59,61 @@ flowchart TD
     OD --> DM>Data Mart]
     HD --> DM
 ```
+
+## Self-hosted architecture
+
+```mermaid
+flowchart TD
+C(Client SDK: C#, Unity) --> |HTTP POST| LB
+subgraph docker compose
+LB>nginx]
+R(Data Receiver: C#, ASP.NET Core)
+Q>redpanda]
+W(Data Writer: C#, ASP.NET Core, EF.Core)
+M(Data Migrator: C#, ASP.NET Core, EF.Core)
+P>Apache Presto]
+DM>Data Mart: Apache Superset]
+end
+LB --> R
+R --> Q
+Q -.-> |Poll| W
+subgraph Local Database
+OD[(Operative Database: Postgres)]
+end
+W ==> OD
+OD -.-> |Retention period| M
+subgraph Local MiniIO
+HD[(Historical database bucket)] --> P
+end
+M ==> HD
+OD --> DM
+P --> DM
+```
+
+## Cloud architecture (AWS-based)
+
+```mermaid
+flowchart TD
+C(Client SDK: C#, Unity) --> |HTTP POST| ALB>Load balancer: AWS ALB]
+ALB --> R 
+subgraph ECS [AWS ECS]
+R(Data Receiver: C#, ASP.NET Core)
+W(Data Writer: C#, ASP.NET Core, EF.Core)
+M(Data Migrator: C#, ASP.NET Core, EF.Core)
+P>Apache Presto]
+DM>Data Mart: Apache Superset]
+end
+R --> Q>Event Queue: AWS SQS]
+Q -.-> |Poll| W
+subgraph RDS [AWS RDS]
+OD[(Operative Database: Postgres)]
+end
+W ==> OD
+OD -.-> |Retention period| M
+subgraph S3 [AWS S3]
+HD[(Historical database bucket)] --> P
+end
+M ==> HD
+OD --> DM
+P --> DM
+```
