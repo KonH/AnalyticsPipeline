@@ -117,3 +117,17 @@ M ==> HD
 OD --> DM
 P --> DM
 ```
+
+## Self-hosted implementation
+
+### Dependencies
+
+- Docker
+
+### Usage
+
+To run whole system:
+
+```
+docker-compose up -d
+```
