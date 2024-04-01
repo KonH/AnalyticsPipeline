@@ -1,0 +1,4 @@
+@DataReceiverService_HostAddress = http://localhost:8081
+
+### Get health status
+GET {{DataReceiverService_HostAddress}}/health/
