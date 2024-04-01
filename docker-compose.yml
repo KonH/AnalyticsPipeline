@@ -11,3 +11,13 @@ services:
       - --kafka-addr PLAINTEXT://0.0.0.0:9092
     ports:
       - "9092:9092"
+        
+  datareceiverservice:
+    build:
+      context: ./DataReceiverService
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8081
