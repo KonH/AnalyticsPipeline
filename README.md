@@ -131,3 +131,9 @@ To run whole system:
 ```
 docker-compose up -d
 ```
+
+To run with full services rebuild:
+
+``` 
+docker-compose up -d --build
+```
