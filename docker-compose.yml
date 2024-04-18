@@ -1,4 +1,9 @@
 ﻿version: '3.8'
+
+volumes:
+  postgres-data:
+    driver: local
+    
 services:
   redpanda:
     image: docker.vectorized.io/vectorized/redpanda:v21.11.15
@@ -21,3 +26,16 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8081
+        
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres-data:/data/postgres
+      - ./pg_initdb:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_DB=analytics_database
+      - POSTGRES_USER=analytics_rw_user
+      - POSTGRES_PASSWORD=analytics_rw_user_password
+      - PGDATA=/data/postgres
+    ports:
+      - "5432:5432"
