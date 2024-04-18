@@ -8,7 +8,7 @@ services:
       - --reserve-memory 0M
       - --overprovisioned
       - --node-id 0
-      - --kafka-addr PLAINTEXT://0.0.0.0:9092
+      - --kafka-addr PLAINTEXT://redpanda:9092
     ports:
       - "9092:9092"
         

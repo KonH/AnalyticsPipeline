@@ -18,8 +18,9 @@ public class DataReceiverController : ControllerBase {
             WriteIndented = true
         };
         var config = new ProducerConfig {
-            BootstrapServers = "0.0.0.0:9092"
+            BootstrapServers = "redpanda:9092"
         };
+        _logger.LogDebug("Create Kafka producer with servers: {bootstrapServers}", config.BootstrapServers);
         _producer = new ProducerBuilder<Null, string>(config)
             .Build();
     }
@@ -32,14 +33,17 @@ public class DataReceiverController : ControllerBase {
                 "Received UserEventsRequest with {eventCount} events: {userEventsJson}", 
                 userEvent.Events.Count, json);
         }
+        _logger.LogDebug("Sending {eventCount} events to message queue", userEvent.Events.Count);
         foreach ( var eventItem in userEvent.Events ) {
+            _logger.LogDebug("Sending event {eventName}:{eventId} to message queue", eventItem.EventName, eventItem.Id);
             var queueEvent = new QueueEvent(eventItem.Id, eventItem.Timestamp, eventItem.EventName, eventItem.Properties, userEvent.UserId);
             var queueEventJson = JsonSerializer.Serialize(queueEvent, _jsonSerializerOptions);
             await _producer.ProduceAsync("message-queue", new Message<Null, string> {
                 Value = queueEventJson
             });
+            _logger.LogDebug("Event {eventName}:{eventId} to message queue sent", eventItem.EventName, eventItem.Id);
         }
-        _logger.LogDebug("Sent {eventCount} events to message queue", userEvent.Events.Count);
+        _logger.LogDebug("{eventCount} events sent to message queue", userEvent.Events.Count);
         return Ok();
     }
 }
