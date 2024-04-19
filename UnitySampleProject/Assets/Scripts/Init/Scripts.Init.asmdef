@@ -1,0 +1,4 @@
+{
+	"name": "Scripts.Init",
+	"references":[ "GUID:99ab932d44f14034fbf724e650bd348d", "GUID:b4f4fef0485894d47b792429905cc8e5", "GUID:58f06661db0dfcd4583fdbb608ebcefb" ]
+}

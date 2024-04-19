@@ -1,0 +1,4 @@
+{
+	"name": "Scripts.Facade",
+	"references":[ "GUID:58f06661db0dfcd4583fdbb608ebcefb", "GUID:b94d20bdc325777418854decc970699d" ]
+}
