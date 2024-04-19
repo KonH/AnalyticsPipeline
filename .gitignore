@@ -9,3 +9,6 @@ UnitySampleProject/Library
 UnitySampleProject/Logs
 UnitySampleProject/Temp
 UnitySampleProject/UserSettings
+UnitySampleProject/obj
+UnitySampleProject/*.csproj
+UnitySampleProject/UnitySampleProject.sln
