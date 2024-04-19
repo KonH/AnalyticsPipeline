@@ -1,2 +1,4 @@
-﻿DataReceiverService/bin/*
+﻿Shared/bin/*
+Shared/obj/*
+DataReceiverService/bin/*
 DataReceiverService/obj/*

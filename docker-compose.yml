@@ -19,8 +19,8 @@ services:
         
   datareceiverservice:
     build:
-      context: ./DataReceiverService
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: DataReceiverService/Dockerfile
     ports:
       - "8081:8081"
     environment:

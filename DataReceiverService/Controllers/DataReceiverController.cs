@@ -2,6 +2,7 @@
 using Confluent.Kafka;
 using DataReceiverService.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Dto;
 
 namespace DataReceiverService.Controllers;
 

@@ -5,9 +5,11 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 ARG BUILD_CONFIGURATION=Release
 WORKDIR "/src"
-COPY ["DataReceiverService.csproj", "DataReceiverService/"]
+COPY ["DataReceiverService/DataReceiverService.csproj", "DataReceiverService/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "DataReceiverService/DataReceiverService.csproj"
-COPY [".", "DataReceiverService/"]
+COPY ["DataReceiverService", "DataReceiverService/"]
+COPY ["Shared", "Shared/"]
 WORKDIR "/src/DataReceiverService"
 RUN dotnet publish "DataReceiverService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
