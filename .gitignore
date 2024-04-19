@@ -2,3 +2,5 @@
 Shared/obj/*
 DataReceiverService/bin/*
 DataReceiverService/obj/*
+DataWriterService/bin/*
+DataWriterService/obj/*

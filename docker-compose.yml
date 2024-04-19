@@ -41,3 +41,16 @@ services:
       - PGDATA=/data/postgres
     ports:
       - "5432:5432"
+        
+  datawriterservice:
+    build:
+      context: .
+      dockerfile: DataWriterService/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8082
+    depends_on:
+      - redpanda
+      - postgres

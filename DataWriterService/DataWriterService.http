@@ -1,0 +1,4 @@
+@DataWriterService_HostAddress = http://localhost:8082
+
+### Get health status
+GET {{DataWriterService_HostAddress}}/health/
