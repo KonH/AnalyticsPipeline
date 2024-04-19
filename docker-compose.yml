@@ -26,6 +26,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8081
+    depends_on:
+      - redpanda
         
   postgres:
     image: postgres:latest
