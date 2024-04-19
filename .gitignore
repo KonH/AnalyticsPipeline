@@ -4,3 +4,8 @@ DataReceiverService/bin/*
 DataReceiverService/obj/*
 DataWriterService/bin/*
 DataWriterService/obj/*
+UnitySampleProject/Build
+UnitySampleProject/Library
+UnitySampleProject/Logs
+UnitySampleProject/Temp
+UnitySampleProject/UserSettings
