@@ -138,8 +138,36 @@ To run with full services rebuild:
 docker-compose up -d --build
 ```
 
+#### Superset configuration
+
+To setup Superset, you need to run the following commands:
+
+```
+docker exec -it analyticspipeline-superset sh
+export FLASK_APP=superset; flask fab create-admin
+superset db upgrade
+superset init
+```
+
+Then you can access Superset at `http://localhost:8088`.
+
+To configure access to operative storage, you need to add a new database connection using web UI:
+
+```
+Plus Sign -> Data -> Connect database:
+> Host: postgres
+> Post: 5432
+> Database name: analytics_database
+> Username: analytics_r_user
+> Password: analytics_r_user_password
+```
+
 ### Examples
 
 #### Unity Sample Project
 
 ![unity sample project](./static/client_prototype.png)
+
+#### Superset Dashboard
+
+![superset dashboard 1](./static/superset_dashboard_1.png)

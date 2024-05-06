@@ -3,6 +3,8 @@
 volumes:
   postgres-data:
     driver: local
+  superset-db:
+    driver: local
     
 services:
   redpanda:
@@ -54,3 +56,33 @@ services:
     depends_on:
       - redpanda
       - postgres
+        
+  superset:
+    image: apache/superset
+    ports:
+      - "8088:8088"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - SUPERSET_SECRET_KEY=unsecure_key_but_it_is_fine_for_testing
+    volumes:
+      - superset-db:/home/superset/.superset
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  superset-worker:
+    image: apache/superset
+    command: superset worker
+    depends_on:
+      - superset
+      - redis
+    environment:
+      - SUPERSET_DB_URI=postgresql+psycopg2://analytics_rw_user:analytics_rw_user_password@postgres:5432/analytics_database
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - superset-db:/home/superset/.superset
